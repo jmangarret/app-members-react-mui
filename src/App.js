@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+
+import Container from '@mui/material/Container';
+import SignIn from './components/SignIn';
+import Member from './layouts/Member';
 
 function App() {
+  const [isLogged, setIsLogged] = React.useState(false);
+
+  const handleLogin = (status) => {
+    setIsLogged(status);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container component="main" maxWidth="md">
+        {
+          isLogged ? 
+          <Member handleLogin={handleLogin}/> :
+          <SignIn handleLogin={handleLogin}/>
+        }
+      </Container>      
     </div>
   );
 }
